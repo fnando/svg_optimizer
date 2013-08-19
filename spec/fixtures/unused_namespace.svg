@@ -1,0 +1,13 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:test="http://example.com/"
+  xmlns:test2="http://example2.com/"
+  xmlns:test3="http://example3.com/"
+  xmlns:test4="http://example4.com/"
+>
+    <test:elem>
+        <test2:elem>
+            test
+        </test2:elem>
+    </test:elem>
+</svg>
