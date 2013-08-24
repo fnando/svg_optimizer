@@ -31,7 +31,6 @@ module SvgOptimizer
 
   def self.optimize(path, target = path)
     xml = Nokogiri::XML(File.read(path))
-    require "pry"; binding.pry
     PLUGINS.each do |plugin_name|
       Plugins.const_get(plugin_name).new(xml).process
     end
