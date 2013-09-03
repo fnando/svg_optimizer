@@ -8,14 +8,13 @@ Gem::Specification.new do |spec|
   spec.version       = SvgOptimizer::VERSION
   spec.authors       = ["Nando Vieira"]
   spec.email         = ["fnando.vieira@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.description   = %q{SVG optimization based on Node's SVGO}
+  spec.summary       = %q{SVG optimization based on Node's SVGO}
+  spec.homepage      = "https://github.com/fnando/svg_optimizer"
   spec.license       = "MIT"
 
-  spec.files         = `git ls-files`.split($/)
-  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
+  spec.files         = Dir["LICENSE.txt", "README.md", "lib/**/*"]
+  spec.test_files    = Dir["spec/**/*"]
   spec.require_paths = ["lib"]
 
   spec.add_dependency "nokogiri"
