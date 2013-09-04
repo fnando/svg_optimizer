@@ -19,11 +19,15 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
-# it will override the original file
-SvgOptimizer.optimize("file.svg")
+# Optimize an existing String.
+xml = File.read("file.svg")
+optimized = SvgOptimizer.optimize(xml)
 
-# it save a copy to optimized/file.svg
-SvgOptimizer.optimize("file.svg", "optimized/file.svg")
+# Optimize a file - it will override the original file.
+SvgOptimizer.optimize_file("file.svg")
+
+# Optimize a file - it saves a copy to "optimized/file.svg".
+SvgOptimizer.optimize_file("file.svg", "optimized/file.svg")
 ```
 
 ## Contributing

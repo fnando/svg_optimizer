@@ -29,13 +29,19 @@ module SvgOptimizer
     RemoveEmptyContainer
   ]
 
-  def self.optimize(path, target = path)
-    xml = Nokogiri::XML(File.read(path))
+  def self.optimize(contents)
+    xml = Nokogiri::XML(contents)
     PLUGINS.each do |plugin_name|
       Plugins.const_get(plugin_name).new(xml).process
     end
 
-    File.open(target, "w") {|file| file << xml.root.to_xml }
+    xml.root.to_xml
+  end
+
+  def self.optimize_file(path, target = path)
+    contents = optimize(File.read(path))
+
+    File.open(target, "w") {|file| file << contents }
     true
   end
 end
