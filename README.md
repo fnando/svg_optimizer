@@ -28,6 +28,16 @@ SvgOptimizer.optimize_file("file.svg")
 
 # Optimize a file - it saves a copy to "optimized/file.svg".
 SvgOptimizer.optimize_file("file.svg", "optimized/file.svg")
+
+# Optimize including only specific tweaks
+# Values: :remove_comment, :remove_editor_namespace,
+#         :remove_empty_attribute, :remove_empty_container,
+#         :remove_empty_text_node, :remove_hidden_element, :remove_metadata,
+#         :remove_raster_image, :remove_unused_namespace
+optimized = SvgOptimizer.optimize(xml, with: :remove_comment)
+
+# Optimize excluding tweaks
+optimized = SvgOptimizer.optimize(xml, without: [:remove_comment, :remove_empty_attribute] )
 ```
 
 ## Contributing
