@@ -14,6 +14,7 @@ module SvgOptimizer
         http://ns.adobe.com/ImageReplacement/1.0/
         http://ns.adobe.com/GenericCustomNamespace/1.0/
         http://ns.adobe.com/XPath/1.0
+        http://www.bohemiancoding.com/sketch/ns
       ]
 
       def process
