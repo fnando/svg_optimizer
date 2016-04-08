@@ -4,6 +4,7 @@ require "svg_optimizer/version"
 require "svg_optimizer/plugins/base"
 require "svg_optimizer/plugins/cleanup_attribute"
 require "svg_optimizer/plugins/cleanup_id"
+require "svg_optimizer/plugins/collapse_groups"
 require "svg_optimizer/plugins/remove_comment"
 require "svg_optimizer/plugins/remove_metadata"
 require "svg_optimizer/plugins/remove_empty_text_node"
@@ -25,6 +26,7 @@ module SvgOptimizer
     RemoveUnusedNamespace
     RemoveRasterImage
     RemoveEmptyAttribute
+    CollapseGroups
     RemoveEmptyTextNode
     RemoveEmptyContainer
   ]
