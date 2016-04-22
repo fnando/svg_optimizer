@@ -11,12 +11,12 @@ module SvgOptimizer
 
       def collapse(group)
         collapse_attributes(group)
-        group.swap(group.children) if should_collapse?(group)
+        group.swap(group.children) if collapse?(group)
       end
 
       def collapse_attributes(group)
         child = group.first_element_child
-        return unless should_collapse_attributes?(group, child)
+        return unless collapse_attributes?(group, child)
 
         group.attributes.each do |attr, val|
           if %w(transform class).include?(attr)
@@ -28,12 +28,12 @@ module SvgOptimizer
         end
       end
 
-      def should_collapse?(group)
+      def collapse?(group)
         group.attributes.empty? &&
           !group.element_children.map(&:name).include?('animate')
       end
 
-      def should_collapse_attributes?(group, child)
+      def collapse_attributes?(group, child)
         return false unless group.attributes.any?
         return false unless group.element_children.length == 1
         return false if child.has_attribute?('id')
