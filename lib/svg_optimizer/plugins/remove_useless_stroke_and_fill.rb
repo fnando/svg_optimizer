@@ -16,8 +16,8 @@ module SvgOptimizer
 
       def remove_useless_attributes(node)
         return if inherited_attribute(node, 'id')
-        remove_stroke(node) if should_remove_stroke?(node)
-        remove_fill(node) if should_remove_fill?(node)
+        remove_stroke(node) if remove_stroke?(node)
+        remove_fill(node) if remove_fill?(node)
       end
 
       def remove_stroke(node)
@@ -38,13 +38,13 @@ module SvgOptimizer
         !inherited_attribute(node, 'fill') || node.has_attribute?('fill')
       end
 
-      def should_remove_stroke?(node)
+      def remove_stroke?(node)
         return true if (inherited_attribute(node, 'stroke') || 'none') == 'none'
         return true if inherited_attribute(node, 'stroke-opacity') == '0'
         return inherited_attribute(node, 'stroke-width') == '0'
       end
 
-      def should_remove_fill?(node)
+      def remove_fill?(node)
         fill = inherited_attribute(node, 'fill')
         return true if fill == 'none'
         return true if inherited_attribute(node, 'fill-opacity') == '0'
