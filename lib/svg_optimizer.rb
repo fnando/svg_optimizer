@@ -4,6 +4,7 @@ require "svg_optimizer/version"
 require "svg_optimizer/plugins/base"
 require "svg_optimizer/plugins/cleanup_attribute"
 require "svg_optimizer/plugins/cleanup_id"
+require "svg_optimizer/plugins/collapse_groups"
 require "svg_optimizer/plugins/remove_comment"
 require "svg_optimizer/plugins/remove_metadata"
 require "svg_optimizer/plugins/remove_empty_text_node"
@@ -13,6 +14,7 @@ require "svg_optimizer/plugins/remove_hidden_element"
 require "svg_optimizer/plugins/remove_raster_image"
 require "svg_optimizer/plugins/remove_empty_attribute"
 require "svg_optimizer/plugins/remove_unused_namespace"
+require "svg_optimizer/plugins/remove_useless_stroke_and_fill"
 
 module SvgOptimizer
   PLUGINS = %w[
@@ -25,6 +27,8 @@ module SvgOptimizer
     RemoveUnusedNamespace
     RemoveRasterImage
     RemoveEmptyAttribute
+    CollapseGroups
+    RemoveUselessStrokeAndFill
     RemoveEmptyTextNode
     RemoveEmptyContainer
   ]
