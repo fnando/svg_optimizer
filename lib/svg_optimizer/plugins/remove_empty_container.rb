@@ -12,6 +12,7 @@ module SvgOptimizer
       end
 
       private
+
       def remove_node(node)
         node.children.empty? && node.remove
         remove_node(node.parent) if node.parent

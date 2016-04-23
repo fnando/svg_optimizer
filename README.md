@@ -36,6 +36,29 @@ SvgOptimizer.optimize_file("file.svg")
 SvgOptimizer.optimize_file("file.svg", "optimized/file.svg")
 ```
 
+You can specify the plugins you want to enable. The method signature is:
+
+```ruby
+SvgOptimizer.optimize(xml, plugins)
+SvgOptimizer.optimize_file(input, output, plugins)
+```
+
+where `plugins` is an array of classes that implement the following contract:
+
+```ruby
+class MyPlugin < SvgOptimizer::Plugins::Base
+  def process
+    xml.xpath("//comment()").remove
+  end
+end
+```
+
+The default list of plugins is stored at `SvgOptimizer::DEFAULT_PLUGINS`. To use your new plugin, just do something like this:
+
+```ruby
+SvgOptimizer.optimize(xml, SvgOptimizer::DEFAULT_PLUGINS + [MyPlugin])
+```
+
 ## Contributing
 
 1. Fork it

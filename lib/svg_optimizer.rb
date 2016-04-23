@@ -18,7 +18,7 @@ require "svg_optimizer/plugins/remove_unused_namespace"
 require "svg_optimizer/plugins/remove_useless_stroke_and_fill"
 
 module SvgOptimizer
-  PLUGINS = %w[
+  DEFAULT_PLUGINS = %w[
     CleanupAttribute
     CleanupId
     RemoveComment
@@ -32,21 +32,16 @@ module SvgOptimizer
     RemoveUselessStrokeAndFill
     RemoveEmptyTextNode
     RemoveEmptyContainer
-  ]
+  ].map {|name| Plugins.const_get(name) }
 
-  def self.optimize(contents)
+  def self.optimize(contents, plugins = DEFAULT_PLUGINS)
     xml = Nokogiri::XML(contents)
-    PLUGINS.each do |plugin_name|
-      Plugins.const_get(plugin_name).new(xml).process
-    end
-
+    plugins.each {|plugin| plugin.new(xml).process }
     xml.root.to_xml
   end
 
-  def self.optimize_file(path, target = path)
-    contents = optimize(File.read(path))
-
-    File.open(target, "w") {|file| file << contents }
+  def self.optimize_file(path, target = path, plugins = DEFAULT_PLUGINS)
+    File.open(target, "w") {|file| file << optimize(File.read(path), plugins) }
     true
   end
 end

@@ -7,6 +7,7 @@ module SvgOptimizer
       end
 
       private
+
       def remove_if_empty(node)
         node.remove if node.text.gsub(/\s/, "").empty?
       end
