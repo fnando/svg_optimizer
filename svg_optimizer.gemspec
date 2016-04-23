@@ -1,15 +1,12 @@
-# coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'svg_optimizer/version'
+require "./lib/svg_optimizer/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "svg_optimizer"
   spec.version       = SvgOptimizer::VERSION
   spec.authors       = ["Nando Vieira"]
   spec.email         = ["fnando.vieira@gmail.com"]
-  spec.description   = %q{SVG optimization based on Node's SVGO}
-  spec.summary       = %q{SVG optimization based on Node's SVGO}
+  spec.description   = "SVG optimization based on Node's SVGO"
+  spec.summary       = spec.description
   spec.homepage      = "https://github.com/fnando/svg_optimizer"
   spec.license       = "MIT"
 
