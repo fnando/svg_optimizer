@@ -18,6 +18,19 @@ module SvgOptimizer
         http://www.bohemiancoding.com/sketch/ns
       ]
 
+      def process
+        namespaces = xml.namespaces
+        remove_namespaced_attributes
+        xml.remove_namespaces!
+
+        namespaces.each do |name, value|
+          next if NAMESPACES.include?(value)
+
+          _, name = name.split(":")
+          xml.root.add_namespace name, value
+        end
+      end
+
       def namespaces_to_be_removed
         xml.namespaces.map do |name, value|
           _, name = name.split(":")
@@ -33,19 +46,6 @@ module SvgOptimizer
               attr.remove if attr.namespace.prefix == ns
             end
           end
-        end
-      end
-
-      def process
-        namespaces = xml.namespaces
-        remove_namespaced_attributes
-        xml.remove_namespaces!
-
-        namespaces.each do |name, value|
-          next if NAMESPACES.include?(value)
-
-          _, name = name.split(":")
-          xml.root.add_namespace name, value
         end
       end
     end

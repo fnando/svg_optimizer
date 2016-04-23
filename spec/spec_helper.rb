@@ -4,6 +4,7 @@ CodeClimate::TestReporter.start
 
 require "bundler/setup"
 require "svg_optimizer"
+require "securerandom"
 
 module RSpecHelpers
   SVG = <<-XML

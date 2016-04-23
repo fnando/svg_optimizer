@@ -41,7 +41,8 @@ module SvgOptimizer
   end
 
   def self.optimize_file(path, target = path, plugins = DEFAULT_PLUGINS)
-    File.open(target, "w") {|file| file << optimize(File.read(path), plugins) }
+    contents = optimize(File.read(path), plugins)
+    File.open(target, "w") {|file| file << contents }
     true
   end
 end
