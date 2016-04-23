@@ -1,5 +1,11 @@
 # SvgOptimizer
 
+[![Travis-CI](https://travis-ci.org/fnando/svg_optimizer.png)](https://travis-ci.org/fnando/svg_optimizer)
+[![Code Climate](https://codeclimate.com/github/fnando/svg_optimizer/badges/gpa.svg)](https://codeclimate.com/github/fnando/svg_optimizer)
+[![Test Coverage](https://codeclimate.com/github/fnando/svg_optimizer/badges/coverage.svg)](https://codeclimate.com/github/fnando/svg_optimizer/coverage)
+[![Gem](https://img.shields.io/gem/v/svg_optimizer.svg)](https://rubygems.org/gems/svg_optimizer)
+[![Gem](https://img.shields.io/gem/dt/svg_optimizer.svg)](https://rubygems.org/gems/svg_optimizer)
+
 Some small optimizations for SVG files.
 
 ## Installation
