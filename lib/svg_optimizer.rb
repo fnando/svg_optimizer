@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "nokogiri"
 
 require "svg_optimizer/version"

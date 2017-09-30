@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module SvgOptimizer
   module Plugins
     class RemoveTitle < Base
