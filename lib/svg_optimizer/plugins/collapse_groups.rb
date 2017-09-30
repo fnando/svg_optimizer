@@ -3,7 +3,7 @@
 module SvgOptimizer
   module Plugins
     class CollapseGroups < Base
-      COLLAPSABLE_ATTRS = %w[transform class]
+      COLLAPSABLE_ATTRS = %w[transform class].freeze
 
       def process
         xml.css("g:not(:empty)").each do |group|

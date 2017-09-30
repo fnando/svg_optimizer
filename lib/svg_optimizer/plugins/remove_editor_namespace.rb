@@ -17,7 +17,7 @@ module SvgOptimizer
         http://ns.adobe.com/GenericCustomNamespace/1.0/
         http://ns.adobe.com/XPath/1.0
         http://www.bohemiancoding.com/sketch/ns
-      ]
+      ].freeze
 
       def process
         namespaces = xml.namespaces

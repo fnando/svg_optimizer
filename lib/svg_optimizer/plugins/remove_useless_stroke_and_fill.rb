@@ -4,8 +4,8 @@ module SvgOptimizer
   module Plugins
     class RemoveUselessStrokeAndFill < Base
       SELECTOR = %w[circle ellipse line path polygon polyline rect].join(",")
-      STROKE_ATTRS = %w[stroke stroke-opacity stroke-width stroke-dashoffset]
-      FILL_ATTRS = %w[fill-opacity fill-rule]
+      STROKE_ATTRS = %w[stroke stroke-opacity stroke-width stroke-dashoffset].freeze
+      FILL_ATTRS = %w[fill-opacity fill-rule].freeze
 
       def process
         return if xml.css("style, script").any?
@@ -24,12 +24,12 @@ module SvgOptimizer
       end
 
       def remove_stroke(node)
-        STROKE_ATTRS.each { |attr| node.delete(attr) }
+        STROKE_ATTRS.each {|attr| node.delete(attr) }
         node["stroke"] = "none" if decline_inherited_stroke?(node)
       end
 
       def remove_fill(node)
-        FILL_ATTRS.each { |attr| node.delete(attr) }
+        FILL_ATTRS.each {|attr| node.delete(attr) }
         node["fill"] = "none" if decline_inherited_fill?(node)
       end
 
@@ -44,19 +44,23 @@ module SvgOptimizer
       def remove_stroke?(node)
         return true if (inherited_attribute(node, "stroke") || "none") == "none"
         return true if inherited_attribute(node, "stroke-opacity") == "0"
-        return inherited_attribute(node, "stroke-width") == "0"
+
+        inherited_attribute(node, "stroke-width") == "0"
       end
 
       def remove_fill?(node)
         fill = inherited_attribute(node, "fill")
+
         return true if fill == "none"
         return true if inherited_attribute(node, "fill-opacity") == "0"
-        return !fill
+
+        !fill
       end
 
       def inherited_attribute(node, attr)
         return if node.nil? || node.document?
         return node[attr] if node.has_attribute?(attr)
+
         inherited_attribute(node.parent, attr)
       end
     end

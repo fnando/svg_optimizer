@@ -6,16 +6,16 @@ module SvgOptimizer
       LETTERS = %w[
         a b c d e f g h i j k l m n o p q r s t u v w x y z
         A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
-      ]
+      ].freeze
 
-      IDS = LETTERS.concat(LETTERS.combination(2).to_a)
+      IDS = LETTERS.dup.concat(LETTERS.combination(2).to_a).freeze
 
       def ids
         @ids ||= IDS.dup
       end
 
       def process
-        # If there a <script> or <style>, don't mess with ids.
+        # If there's a <script> or <style>, don't mess with ids.
         return if xml.css("script, style").any?
 
         # Replace the ids otherwise.
@@ -41,6 +41,7 @@ module SvgOptimizer
       def remove_unused_id(node, has_url_refs, has_href_refs)
         return if has_url_refs
         return if has_href_refs
+
         node.remove_attribute("id")
       end
 
