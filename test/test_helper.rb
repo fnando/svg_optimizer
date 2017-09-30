@@ -7,7 +7,10 @@ require "bundler/setup"
 require "svg_optimizer"
 require "securerandom"
 
-module RSpecHelpers
+require "minitest/utils"
+require "minitest/autorun"
+
+module InstanceHelpers
   SVG = <<-XML
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
@@ -22,41 +25,50 @@ module RSpecHelpers
   end
 
   def fixtures_path
-    File.expand_path("../fixtures", __FILE__)
+    self.class.fixtures_path
   end
+end
 
-  def setup_plugin_test
-    let(:input_xml) { Nokogiri::XML(input_content, &:noblanks) }
-    let(:plugin) { described_class.new(input_xml) }
-    let(:xml) { plugin.xml }
-    before { plugin.process }
-  end
-
+module ClassHelpers
   def with_svg_plugin(content)
     let(:file_path) { File.join(fixtures_path, content) }
     let(:input_content) { File.file?(file_path) ? File.read(file_path) : build_svg(content) }
     setup_plugin_test
   end
 
-  def test_with_fixture_set(name)
+  def setup_plugin_test
+    let(:input_xml) { Nokogiri::XML(input_content, &:noblanks) }
+    let(:plugin) { plugin_class.new(input_xml) }
+    let(:xml) { plugin.xml }
+    setup { plugin.process }
+  end
+
+  def plugin_class(plugin_class)
+    let(:plugin_class) { plugin_class }
+  end
+
+  def fixtures_path
+    File.expand_path("../fixtures", __FILE__)
+  end
+
+  def test_with_fixture_set(name, plugin_class_to_be_tested)
     Dir.glob(File.join(fixtures_path, name, "*.svg")).each do |fixture|
-      context "output from fixture: #{fixture}" do
+      Class.new(Minitest::Test) do
+        plugin_class plugin_class_to_be_tested
         let(:fixture_content) { File.read(fixture) }
         let(:input_content) { fixture_content.split("@@@")[0].strip }
         let(:expected_content) { fixture_content.split("@@@")[1].strip }
         let(:expected) { Nokogiri::XML(expected_content, &:noblanks).root.to_xml }
-        subject { xml.root.to_xml }
+        let(:subject) { xml.root.to_xml }
         setup_plugin_test
 
-        it { is_expected.to eq(expected) }
+        test "has expected output (#{fixture})" do
+          assert_equal expected, subject
+        end
       end
     end
   end
-
 end
 
-RSpec.configure do |config|
-  config.order = "random"
-  config.extend RSpecHelpers
-  config.include RSpecHelpers
-end
+Minitest::Test.include(InstanceHelpers)
+Minitest::Test.extend(ClassHelpers)

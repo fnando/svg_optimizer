@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
-require "spec_helper"
+require "test_helper"
 
-describe SvgOptimizer::Plugins::RemoveRasterImage do
+class RemoveRasterImageTest < Minitest::Test
+  plugin_class SvgOptimizer::Plugins::RemoveRasterImage
   with_svg_plugin <<-SVG
     <g>
       <image xlink:href="raster.jpg" width="100" height="100"/>
@@ -12,5 +13,7 @@ describe SvgOptimizer::Plugins::RemoveRasterImage do
     </g>
   SVG
 
-  it { expect(xml.css("image").size).to eql(1) }
+  test "applies plugin" do
+    assert_equal 1, xml.css("image").size
+  end
 end

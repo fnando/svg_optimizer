@@ -1,30 +1,31 @@
-require "spec_helper"
+require "test_helper"
 
-describe SvgOptimizer do
-  context "file saving" do
+class SvgOptimizerTest
+  class FileSavingTest < Minitest::Test
     let(:input) { "/tmp/#{SecureRandom.uuid}.svg" }
     let(:output) { "/tmp/#{SecureRandom.uuid}.svg" }
     let(:raw_svg) { build_svg("<!-- foo --><text>SVG</text>") }
     let(:output_svg) { SvgOptimizer.optimize(raw_svg) }
 
-    before do
+    setup do
       File.open(input, "w") {|file| file << raw_svg }
     end
 
-    it "overrides existing file with optimized version" do
+    test "overrides existing file with optimized version" do
       SvgOptimizer.optimize_file(input)
-      expect(File.read(input)).to eq(output_svg)
+      assert_equal File.read(input), output_svg
     end
 
-    it "saves new file file with optimized version" do
+    test "saves new file file with optimized version" do
       SvgOptimizer.optimize_file(input, output)
-      expect(File.read(input)).to eq(raw_svg)
-      expect(File.read(output)).to eq(output_svg)
+
+      assert_equal raw_svg, File.read(input)
+      assert_equal output_svg, File.read(output)
     end
   end
 
-  context "plugin selection" do
-    it "applies all plugins" do
+  class PluginSelectionTest < Minitest::Test
+    test "applies all plugins" do
       svg = build_svg <<-SVG
         <!-- foo -->
         <g></g>
@@ -33,11 +34,11 @@ describe SvgOptimizer do
 
       xml = Nokogiri::XML(SvgOptimizer.optimize(svg))
 
-      expect(xml.xpath("//comment()")).to be_empty
-      expect(xml.css("g")).to be_empty
+      assert xml.xpath("//comment()").empty?
+      assert xml.css("g").empty?
     end
 
-    it "applies just specified plugins" do
+    test "applies just specified plugins" do
       plugins = [SvgOptimizer::Plugins::RemoveComment]
       svg = build_svg <<-SVG
         <!-- foo -->
@@ -47,8 +48,8 @@ describe SvgOptimizer do
 
       xml = Nokogiri::XML(SvgOptimizer.optimize(svg, plugins))
 
-      expect(xml.xpath("//comment()")).to be_empty
-      expect(xml.css("g").length).to eql(1)
+      assert xml.xpath("//comment()").empty?
+      assert_equal 1, xml.css("g").size
     end
   end
 end
