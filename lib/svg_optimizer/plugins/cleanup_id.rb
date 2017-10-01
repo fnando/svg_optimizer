@@ -9,6 +9,7 @@ module SvgOptimizer
       ].freeze
 
       IDS = LETTERS.dup.concat(LETTERS.combination(2).to_a).freeze
+      XLINK_NAMESPACE = "http://www.w3.org/1999/xlink".freeze
 
       def ids
         @ids ||= IDS.dup
@@ -57,8 +58,15 @@ module SvgOptimizer
         nodes.any?
       end
 
+      def xlink_namespace?
+        xml.root.namespace_definitions.map(&:href).include?(XLINK_NAMESPACE)
+      end
+
       def replace_href_references(old_id, new_id)
-        nodes = xml.css("[href='##{old_id}'], [xlink|href='##{old_id}']")
+        scopes = ["[href='##{old_id}']"]
+        scopes << "[xlink|href='##{old_id}']" if xlink_namespace?
+
+        nodes = xml.css(scopes.join(","))
 
         nodes.each do |node|
           node.attributes.map(&:last).each do |attr|
