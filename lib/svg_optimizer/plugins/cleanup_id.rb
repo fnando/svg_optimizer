@@ -19,6 +19,10 @@ module SvgOptimizer
         # If there's a <script> or <style>, don't mess with ids.
         return if xml.css("script, style").any?
 
+        # SVG can have ids as arrays.
+        # Skip id optimization if that's the case.
+        return if xml.css("[id^='[']").size.nonzero?
+
         # Replace the ids otherwise.
         xml.css("[id]").each(&method(:cleanup_id))
       end
