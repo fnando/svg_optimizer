@@ -13,6 +13,7 @@ module SvgOptimizer
 
       def remove_unused_ns(ns)
         return if xml.xpath("//#{ns.prefix}:*").any?
+        return if xml.xpath("//@*[namespace-uri()='#{ns.href}']").any?
 
         source = xml.root.to_s.gsub(/ *xmlns:#{ns.prefix}=".*?"/, "")
         xml.root = Nokogiri::XML(source).root
