@@ -22,21 +22,21 @@ require "svg_optimizer/plugins/remove_description"
 
 module SvgOptimizer
   DEFAULT_PLUGINS = %w[
+    RemoveTitle
+    RemoveDescription
+    RemoveUnusedNamespace
     CleanupAttribute
     CleanupId
     RemoveComment
     RemoveMetadata
     RemoveEditorNamespace
     RemoveHiddenElement
-    RemoveUnusedNamespace
     RemoveRasterImage
     RemoveEmptyAttribute
     CollapseGroups
     RemoveUselessStrokeAndFill
     RemoveEmptyTextNode
     RemoveEmptyContainer
-    RemoveTitle
-    RemoveDescription
   ].map {|name| Plugins.const_get(name) }
 
   def self.optimize(contents, plugins = DEFAULT_PLUGINS)

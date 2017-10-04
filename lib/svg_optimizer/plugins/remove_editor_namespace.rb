@@ -3,50 +3,54 @@
 module SvgOptimizer
   module Plugins
     class RemoveEditorNamespace < Base
-      NAMESPACES = %w[
-        http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd
-        http://www.inkscape.org/namespaces/inkscape
-        http://ns.adobe.com/AdobeIllustrator/10.0/
-        http://ns.adobe.com/Graphs/1.0/
-        http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/
-        http://ns.adobe.com/Variables/1.0/
-        http://ns.adobe.com/SaveForWeb/1.0/
-        http://ns.adobe.com/Extensibility/1.0/
-        http://ns.adobe.com/Flows/1.0/
-        http://ns.adobe.com/ImageReplacement/1.0/
-        http://ns.adobe.com/GenericCustomNamespace/1.0/
-        http://ns.adobe.com/XPath/1.0
-        http://www.bohemiancoding.com/sketch/ns
+      NAMESPACES = [
+        "http://ns.adobe.com/AdobeIllustrator/10.0/",
+        "http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/",
+        "http://ns.adobe.com/Extensibility/1.0/",
+        "http://ns.adobe.com/Flows/1.0/",
+        "http://ns.adobe.com/GenericCustomNamespace/1.0/",
+        "http://ns.adobe.com/Graphs/1.0/",
+        "http://ns.adobe.com/ImageReplacement/1.0/",
+        "http://ns.adobe.com/SaveForWeb/1.0/",
+        "http://ns.adobe.com/Variables/1.0/",
+        "http://ns.adobe.com/XPath/1.0",
+        "http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd",
+        "http://www.bohemiancoding.com/sketch/ns",
+        "http://www.inkscape.org/namespaces/inkscape"
       ].freeze
 
       def process
-        namespaces = xml.namespaces
-        remove_namespaced_attributes
-        xml.remove_namespaces!
+        xml.namespaces.each do |full_name, href|
+          _, name = full_name.split(":")
+          next unless NAMESPACES.include?(href)
 
-        namespaces.each do |name, value|
-          next if NAMESPACES.include?(value)
+          remove_namespaced_attributes(name, href)
+        end
 
-          _, name = name.split(":")
-          xml.root.add_namespace name, value
+        xml.root.namespace_definitions.each do |namespace|
+          remove_namespace(namespace) if NAMESPACES.include?(namespace.href)
         end
       end
 
-      def namespaces_to_be_removed
-        xml.namespaces.map do |name, value|
-          _, name = name.split(":")
-          name if NAMESPACES.include?(value)
-        end.compact
+      def remove_namespaced_attributes(name, href)
+        xml.xpath("//@*[namespace-uri()='#{href}']").each do |node|
+          remove_matching_attribute(node, name)
+        end
+
+        xml.xpath("//*[@#{name}:*]").each do |node|
+          remove_matching_attribute(node, name)
+        end
       end
 
-      def remove_namespaced_attributes
-        namespaces_to_be_removed.each do |ns|
-          xml.xpath("//*[@#{ns}:*]").each do |node|
-            node.attributes.each do |_, attr|
-              next unless attr.namespace
-              attr.remove if attr.namespace.prefix == ns
-            end
-          end
+      def remove_namespace(namespace)
+        source = xml.root.to_s.gsub(/ *xmlns:#{namespace.prefix}=".*?"/, "")
+        xml.root = Nokogiri::XML(source).root
+      end
+
+      def remove_matching_attribute(node, name)
+        node.attributes.each do |_, attr|
+          next unless attr.namespace
+          attr.remove if attr.namespace.prefix == name
         end
       end
     end
