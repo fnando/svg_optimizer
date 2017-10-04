@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 module SvgOptimizer
-  VERSION = "0.2.2".freeze
+  VERSION = "0.2.3".freeze
 end
