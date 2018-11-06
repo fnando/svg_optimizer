@@ -20,4 +20,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "pry-meta"
   spec.add_development_dependency "minitest-utils"
   spec.add_development_dependency "simplecov"
+  spec.add_development_dependency "css_parser"
 end
