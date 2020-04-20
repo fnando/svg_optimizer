@@ -4,7 +4,7 @@ module SvgOptimizer
   module Plugins
     class RemoveDescription < Base
       def process
-        xml.xpath("//desc").remove
+        xml.css("desc").remove
       end
     end
   end

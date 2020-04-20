@@ -4,7 +4,7 @@ module SvgOptimizer
   module Plugins
     class RemoveTitle < Base
       def process
-        xml.xpath("//title").remove
+        xml.css("title").remove
       end
     end
   end
