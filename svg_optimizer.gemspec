@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "./lib/svg_optimizer/version"
 
 Gem::Specification.new do |spec|
@@ -9,6 +11,8 @@ Gem::Specification.new do |spec|
   spec.summary       = spec.description
   spec.homepage      = "https://github.com/fnando/svg_optimizer"
   spec.license       = "MIT"
+  spec.required_ruby_version = ">= 2.7"
+  spec.metadata = {"rubygems_mfa_required" => "true"}
 
   spec.files         = Dir["LICENSE.txt", "README.md", "lib/**/*"]
   spec.test_files    = Dir["spec/**/*"]
@@ -16,8 +20,10 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "nokogiri"
   spec.add_development_dependency "bundler"
-  spec.add_development_dependency "rake"
-  spec.add_development_dependency "pry-meta"
   spec.add_development_dependency "minitest-utils"
+  spec.add_development_dependency "pry-meta"
+  spec.add_development_dependency "rake"
+  spec.add_development_dependency "rubocop"
+  spec.add_development_dependency "rubocop-fnando"
   spec.add_development_dependency "simplecov"
 end

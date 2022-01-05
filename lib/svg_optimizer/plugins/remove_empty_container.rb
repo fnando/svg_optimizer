@@ -3,7 +3,17 @@
 module SvgOptimizer
   module Plugins
     class RemoveEmptyContainer < Base
-      ELEMENTS = %w[a defs g marker mask missing-glyph pattern switch symbol].freeze
+      ELEMENTS = %w[
+        a
+        defs
+        g
+        marker
+        mask
+        missing-glyph
+        pattern
+        switch
+        symbol
+      ].freeze
       SELECTOR = ELEMENTS.map {|element| %[#{element}:empty] }.join(", ")
 
       def process
@@ -12,9 +22,7 @@ module SvgOptimizer
         end
       end
 
-      private
-
-      def remove_node(node)
+      private def remove_node(node)
         node.children.empty? && node.remove
         remove_node(node.parent) if node.parent
       end

@@ -53,7 +53,8 @@ class MyPlugin < SvgOptimizer::Plugins::Base
 end
 ```
 
-The default list of plugins is stored at `SvgOptimizer::DEFAULT_PLUGINS`. To use your new plugin, just do something like this:
+The default list of plugins is stored at `SvgOptimizer::DEFAULT_PLUGINS`. To use
+your new plugin, just do something like this:
 
 ```ruby
 SvgOptimizer.optimize(xml, SvgOptimizer::DEFAULT_PLUGINS + [MyPlugin])

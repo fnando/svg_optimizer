@@ -22,7 +22,8 @@ module CleanupIdTest
     with_svg_plugin "cleanup_id_without_xlink.svg"
 
     test "applies plugin" do
-      assert_equal File.read("./test/fixtures/cleanup_id_without_xlink_expected.svg").to_s.chomp, xml.root.to_s
+      svg = File.read("./test/fixtures/cleanup_id_without_xlink_expected.svg")
+      assert_equal svg.to_s.chomp, xml.root.to_s
     end
   end
 end

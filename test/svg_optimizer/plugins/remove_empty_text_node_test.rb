@@ -2,7 +2,7 @@
 
 require "test_helper"
 
-describe SvgOptimizer::Plugins::RemoveEmptyTextNode do
+module RemoveEmptyTextNodeTests
   class GroupsWithEmptyTextNodesOnlyTest < Minitest::Test
     plugin_class SvgOptimizer::Plugins::RemoveEmptyTextNode
     with_svg_plugin %[<g>    \n\t\r\n  </g>]

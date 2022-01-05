@@ -9,7 +9,7 @@ module SvgOptimizer
       ].freeze
 
       IDS = LETTERS.dup.concat(LETTERS.combination(2).to_a).freeze
-      XLINK_NAMESPACE = "http://www.w3.org/1999/xlink".freeze
+      XLINK_NAMESPACE = "http://www.w3.org/1999/xlink"
 
       def ids
         @ids ||= IDS.dup

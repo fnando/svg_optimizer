@@ -50,6 +50,7 @@ module SvgOptimizer
       def remove_matching_attribute(node, name)
         node.attributes.each do |_, attr|
           next unless attr.namespace
+
           attr.remove if attr.namespace.prefix == name
         end
       end

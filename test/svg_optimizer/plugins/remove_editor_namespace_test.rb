@@ -8,8 +8,8 @@ module RemoveEditorNamespaceTest
     plugin_class SvgOptimizer::Plugins::RemoveEditorNamespace
 
     test "applies plugin" do
-      assert xml.namespaces.values.include?("http://www.w3.org/2000/svg")
-      assert xml.namespaces.values.include?("http://www.w3.org/1999/xlink")
+      assert_includes xml.namespaces.values, "http://www.w3.org/2000/svg"
+      assert_includes xml.namespaces.values, "http://www.w3.org/1999/xlink"
     end
   end
 

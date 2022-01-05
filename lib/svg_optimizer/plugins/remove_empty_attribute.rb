@@ -11,9 +11,7 @@ module SvgOptimizer
         end
       end
 
-      private
-
-      def remove_if_empty(node, attr)
+      private def remove_if_empty(node, attr)
         node.remove_attribute(attr) if node[attr].empty?
       end
     end

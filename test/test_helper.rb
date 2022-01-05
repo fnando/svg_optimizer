@@ -11,15 +11,14 @@ require "minitest/utils"
 require "minitest/autorun"
 
 module InstanceHelpers
-  SVG = <<-XML
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
-  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<?xml version="1.0" encoding="utf-8"?>
-<svg xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  %s
-</svg>
+  SVG = <<~XML
+    <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+      "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+    <?xml version="1.0" encoding="utf-8"?>
+    <svg xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      %s
+    </svg>
   XML
-
   def build_svg(content)
     SVG % content
   end
@@ -32,7 +31,9 @@ end
 module ClassHelpers
   def with_svg_plugin(content)
     let(:file_path) { File.join(fixtures_path, content) }
-    let(:input_content) { File.file?(file_path) ? File.read(file_path) : build_svg(content) }
+    let(:input_content) do
+      File.file?(file_path) ? File.read(file_path) : build_svg(content)
+    end
     setup_plugin_test
   end
 
@@ -48,7 +49,7 @@ module ClassHelpers
   end
 
   def fixtures_path
-    File.expand_path("../fixtures", __FILE__)
+    File.expand_path("fixtures", __dir__)
   end
 
   def test_with_fixture_set(name, plugin_class_to_be_tested)
@@ -58,7 +59,9 @@ module ClassHelpers
         let(:fixture_content) { File.read(fixture) }
         let(:input_content) { fixture_content.split("@@@")[0].strip }
         let(:expected_content) { fixture_content.split("@@@")[1].strip }
-        let(:expected) { Nokogiri::XML(expected_content, &:noblanks).root.to_xml }
+        let(:expected) do
+          Nokogiri::XML(expected_content, &:noblanks).root.to_xml
+        end
         let(:subject) { xml.root.to_xml }
         setup_plugin_test
 

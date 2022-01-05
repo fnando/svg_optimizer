@@ -1,0 +1,9 @@
+---
+inherit_gem:
+  rubocop-fnando: .rubocop.yml
+
+AllCops:
+  TargetRubyVersion: 2.7
+
+Performance/MethodObjectAsBlock:
+  Enable: false

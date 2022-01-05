@@ -10,6 +10,7 @@ module RemoveUnusedNamespaceTest
     let(:namespaces) do
       xml.root.namespace_definitions.each_with_object({}) do |ns, buffer|
         next unless ns.prefix
+
         buffer[ns.prefix] = ns.href
       end
     end
