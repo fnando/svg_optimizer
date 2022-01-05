@@ -1,8 +1,7 @@
 # SvgOptimizer
 
-[![Travis-CI](https://travis-ci.org/fnando/svg_optimizer.svg)](https://travis-ci.org/fnando/svg_optimizer)
+[![Tests](https://github.com/fnando/svg_optimizer/workflows/ruby-tests/badge.svg)](https://github.com/fnando/svg_optimizer)
 [![Code Climate](https://codeclimate.com/github/fnando/svg_optimizer/badges/gpa.svg)](https://codeclimate.com/github/fnando/svg_optimizer)
-[![Test Coverage](https://codeclimate.com/github/fnando/svg_optimizer/badges/coverage.svg)](https://codeclimate.com/github/fnando/svg_optimizer/coverage)
 [![Gem](https://img.shields.io/gem/v/svg_optimizer.svg)](https://rubygems.org/gems/svg_optimizer)
 [![Gem](https://img.shields.io/gem/dt/svg_optimizer.svg)](https://rubygems.org/gems/svg_optimizer)
 
@@ -10,17 +9,15 @@ Some small optimizations for SVG files.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+```bash
+gem install svg_optimizer
+```
 
-    gem 'svg_optimizer'
+Or add the following line to your project's Gemfile:
 
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install svg_optimizer
+```ruby
+gem "svg_optimizer"
+```
 
 ## Usage
 
@@ -60,10 +57,27 @@ your new plugin, just do something like this:
 SvgOptimizer.optimize(xml, SvgOptimizer::DEFAULT_PLUGINS + [MyPlugin])
 ```
 
+## Maintainer
+
+- [Nando Vieira](https://github.com/fnando)
+
+## Contributors
+
+- https://github.com/fnando/svg_optimizer/contributors
+
 ## Contributing
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+For more details about how to contribute, please read
+https://github.com/fnando/svg_optimizer/blob/main/CONTRIBUTING.md.
+
+## License
+
+The gem is available as open source under the terms of the
+[MIT License](https://opensource.org/licenses/MIT). A copy of the license can be
+found at https://github.com/fnando/svg_optimizer/blob/main/LICENSE.md.
+
+## Code of Conduct
+
+Everyone interacting in the svg_optimizer project's codebases, issue trackers,
+chat rooms and mailing lists is expected to follow the
+[code of conduct](https://github.com/fnando/svg_optimizer/blob/main/CODE_OF_CONDUCT.md).
