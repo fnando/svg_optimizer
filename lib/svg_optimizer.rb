@@ -38,8 +38,12 @@ module SvgOptimizer
   ].map {|name| Plugins.const_get(name) }
 
   def self.optimize(contents, plugins = DEFAULT_PLUGINS)
-    xml = Nokogiri::XML(contents)
+    xml = Nokogiri::XML(contents) do |config|
+      config.recover.noent
+    end
+
     plugins.each {|plugin| plugin.new(xml).process }
+
     xml.root.to_xml
   end
 
