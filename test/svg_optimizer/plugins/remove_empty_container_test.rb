@@ -8,7 +8,7 @@ module RemoveEmptyContainerTest
     with_svg_plugin "<g><marker><a/></marker></g>"
 
     test "applies plugin" do
-      assert xml.root.css("*").empty?
+      assert_empty xml.root.css("*")
     end
   end
 end

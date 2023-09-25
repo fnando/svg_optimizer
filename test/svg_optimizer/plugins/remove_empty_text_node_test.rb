@@ -8,7 +8,7 @@ module RemoveEmptyTextNodeTests
     with_svg_plugin %[<g>    \n\t\r\n  </g>]
 
     test "applies plugin" do
-      assert xml.css("g").children.empty?
+      assert_empty xml.css("g").children
     end
   end
 
@@ -17,7 +17,7 @@ module RemoveEmptyTextNodeTests
     with_svg_plugin %[<g> Hello   \n\t\r\n  </g>]
 
     test "applies plugin" do
-      refute xml.css("g").children.empty?
+      refute_empty xml.css("g").children
     end
   end
 end

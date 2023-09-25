@@ -36,8 +36,8 @@ class SvgOptimizerTest
 
       xml = Nokogiri::XML(SvgOptimizer.optimize(svg))
 
-      assert xml.xpath("//comment()").empty?
-      assert xml.css("g").empty?
+      assert_empty xml.xpath("//comment()")
+      assert_empty xml.css("g")
     end
 
     test "applies just specified plugins" do
@@ -50,7 +50,7 @@ class SvgOptimizerTest
 
       xml = Nokogiri::XML(SvgOptimizer.optimize(svg, plugins))
 
-      assert xml.xpath("//comment()").empty?
+      assert_empty xml.xpath("//comment()")
       assert_equal 1, xml.css("g").size
     end
   end

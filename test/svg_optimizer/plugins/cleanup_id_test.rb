@@ -10,8 +10,8 @@ module CleanupIdTest
     test "applies plugin" do
       assert_equal "a", xml.css("linearGradient").first["id"]
       assert_equal "url(#a)", xml.css("circle").first["fill"]
-      assert xml.css("circle[id]").empty?
-      assert xml.css("g[id]").empty?
+      assert_empty xml.css("circle[id]")
+      assert_empty xml.css("g[id]")
       assert_equal 2, xml.css("tref[xlink|href='#b']").size
       assert_equal "b", xml.css("text").first["id"]
     end

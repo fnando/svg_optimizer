@@ -12,6 +12,6 @@ class RemoveCommentTest < Minitest::Test
   SVG
 
   test "applies plugin" do
-    assert xml.xpath("//comment()").empty?
+    assert_empty xml.xpath("//comment()")
   end
 end

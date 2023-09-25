@@ -7,7 +7,7 @@ class RemoveTitleTest < Minitest::Test
   with_svg_plugin "title_and_desc.svg"
 
   test "applies plugin" do
-    assert xml.css("title").empty?
+    assert_empty xml.css("title")
   end
 end
 
@@ -16,6 +16,6 @@ class RemoveTitleFromSpriteTest < Minitest::Test
   with_svg_plugin "cleanup_title.svg"
 
   test "applies plugin" do
-    assert xml.css("title").empty?
+    assert_empty xml.css("title")
   end
 end

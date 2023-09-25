@@ -10,7 +10,7 @@ module RemoveHiddenElementTest
     SVG
 
     test "applies plugin" do
-      assert xml.css("path").empty?
+      assert_empty xml.css("path")
     end
   end
 
@@ -21,7 +21,7 @@ module RemoveHiddenElementTest
     SVG
 
     test "applies plugin" do
-      assert xml.css("path").empty?
+      assert_empty xml.css("path")
     end
   end
 
@@ -32,7 +32,7 @@ module RemoveHiddenElementTest
     SVG
 
     test "applies plugin" do
-      assert xml.css("circle").empty?
+      assert_empty xml.css("circle")
     end
   end
 
@@ -44,7 +44,7 @@ module RemoveHiddenElementTest
     SVG
 
     test "applies plugin" do
-      assert xml.css("ellipse").empty?
+      assert_empty xml.css("ellipse")
     end
   end
 
@@ -56,7 +56,7 @@ module RemoveHiddenElementTest
     SVG
 
     test "applies plugin" do
-      assert xml.css("rect").empty?
+      assert_empty xml.css("rect")
     end
   end
 
@@ -68,7 +68,7 @@ module RemoveHiddenElementTest
     SVG
 
     test "applies plugin" do
-      assert xml.css("pattern").empty?
+      assert_empty xml.css("pattern")
     end
   end
 
@@ -80,7 +80,7 @@ module RemoveHiddenElementTest
     SVG
 
     test "applies plugin" do
-      assert xml.css("image").empty?
+      assert_empty xml.css("image")
     end
   end
 
@@ -91,7 +91,7 @@ module RemoveHiddenElementTest
     SVG
 
     test "applies plugin" do
-      assert xml.css("path").empty?
+      assert_empty xml.css("path")
     end
   end
 
@@ -104,7 +104,7 @@ module RemoveHiddenElementTest
     SVG
 
     test "applies plugin" do
-      assert xml.root.css("*").empty?
+      assert_empty xml.root.css("*")
     end
   end
 end

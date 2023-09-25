@@ -11,6 +11,6 @@ class RemoveMetadataTest < Minitest::Test
   SVG
 
   test "applies plugin" do
-    assert xml.css("metadata").empty?
+    assert_empty xml.css("metadata")
   end
 end

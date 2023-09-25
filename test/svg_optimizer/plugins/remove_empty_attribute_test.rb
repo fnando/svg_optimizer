@@ -11,6 +11,6 @@ class RemoveEmptyAttributeTest < Minitest::Test
   SVG
 
   test "applies plugin" do
-    assert xml.xpath("//*[@*='']").empty?
+    assert_empty xml.xpath("//*[@*='']")
   end
 end

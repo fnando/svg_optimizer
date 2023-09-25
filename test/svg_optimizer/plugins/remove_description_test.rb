@@ -7,6 +7,6 @@ class RemoveDescriptionTest < Minitest::Test
   with_svg_plugin "title_and_desc.svg"
 
   test "applies plugin" do
-    assert xml.css("desc").empty?
+    assert_empty xml.css("desc")
   end
 end
