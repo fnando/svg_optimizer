@@ -37,9 +37,11 @@ module SvgOptimizer
     RemoveEmptyContainer
   ].map {|name| Plugins.const_get(name) }
 
-  def self.optimize(contents, plugins = DEFAULT_PLUGINS)
+  def self.optimize(contents, plugins = DEFAULT_PLUGINS, trusted: false)
     xml = Nokogiri::XML(contents) do |config|
-      config.recover.noent
+      if trusted
+        config.recover.noent
+      end
     end
 
     plugins.each {|plugin| plugin.new(xml).process }
@@ -47,8 +49,8 @@ module SvgOptimizer
     xml.root.to_xml
   end
 
-  def self.optimize_file(path, target = path, plugins = DEFAULT_PLUGINS)
-    contents = optimize(File.read(path), plugins)
+  def self.optimize_file(path, target = path, plugins = DEFAULT_PLUGINS, trusted: false)
+    contents = optimize(File.read(path), plugins, trusted: trusted)
     File.open(target, "w") {|file| file << contents }
     true
   end
