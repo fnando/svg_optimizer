@@ -11,6 +11,12 @@ Prefix your message with one of the following:
 - [Security] in case of vulnerabilities.
 -->
 
+## v0.3.0
+
+- [Security] Disable
+  [ParseOptions::NOENT](https://nokogiri.org/rdoc/Nokogiri/XML/ParseOptions.html)
+  by default, as it must be only enabled for trusted documents.
+
 ## v0.2.6
 
 - [Changed] All `<title>` elements are now stripped.

@@ -1,7 +1,6 @@
 # SvgOptimizer
 
 [![Tests](https://github.com/fnando/svg_optimizer/workflows/ruby-tests/badge.svg)](https://github.com/fnando/svg_optimizer)
-[![Code Climate](https://codeclimate.com/github/fnando/svg_optimizer/badges/gpa.svg)](https://codeclimate.com/github/fnando/svg_optimizer)
 [![Gem](https://img.shields.io/gem/v/svg_optimizer.svg)](https://rubygems.org/gems/svg_optimizer)
 [![Gem](https://img.shields.io/gem/dt/svg_optimizer.svg)](https://rubygems.org/gems/svg_optimizer)
 
