@@ -33,6 +33,20 @@ SvgOptimizer.optimize_file("file.svg")
 SvgOptimizer.optimize_file("file.svg", "optimized/file.svg")
 ```
 
+You may have a need to optimize a *trusted* SVG document with entities that need to be
+expanded. **Only if you are sure the file is trusted**, you may enable this additional entity
+processing by passing the `trusted:` keyword argument:
+
+``` ruby
+# Optimize an existing trusted String which requires entity expansion.
+xml = File.read("file.svg")
+optimized = SvgOptimizer.optimize(xml, trusted: true)
+
+# Optimize a trusted file which requires entity expansion - it will override the original file.
+SvgOptimizer.optimize_file("file.svg", trusted: true)
+```
+
+
 You can specify the plugins you want to enable. The method signature is:
 
 ```ruby
