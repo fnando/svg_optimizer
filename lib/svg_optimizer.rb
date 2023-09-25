@@ -39,9 +39,7 @@ module SvgOptimizer
 
   def self.optimize(contents, plugins = DEFAULT_PLUGINS, trusted: false)
     xml = Nokogiri::XML(contents) do |config|
-      if trusted
-        config.recover.noent
-      end
+      config.recover.noent if trusted
     end
 
     plugins.each {|plugin| plugin.new(xml).process }
@@ -49,7 +47,12 @@ module SvgOptimizer
     xml.root.to_xml
   end
 
-  def self.optimize_file(path, target = path, plugins = DEFAULT_PLUGINS, trusted: false)
+  def self.optimize_file(
+    path,
+    target = path,
+    plugins = DEFAULT_PLUGINS,
+    trusted: false
+  )
     contents = optimize(File.read(path), plugins, trusted: trusted)
     File.open(target, "w") {|file| file << contents }
     true
