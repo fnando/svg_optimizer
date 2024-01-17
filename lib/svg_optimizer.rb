@@ -53,7 +53,7 @@ module SvgOptimizer
     plugins = DEFAULT_PLUGINS,
     trusted: false
   )
-    contents = optimize(File.read(path), plugins, trusted: trusted)
+    contents = optimize(File.read(path), plugins, trusted:)
     File.open(target, "w") {|file| file << contents }
     true
   end

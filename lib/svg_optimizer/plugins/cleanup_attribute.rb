@@ -5,7 +5,7 @@ module SvgOptimizer
     class CleanupAttribute < Base
       def process
         xml.xpath("//*[@*]").each do |node|
-          node.attributes.each do |_, attribute|
+          node.attributes.each_value do |attribute|
             cleanup_attribute attribute
           end
         end

@@ -5,7 +5,7 @@ module SvgOptimizer
     class RemoveEmptyAttribute < Base
       def process
         xml.xpath("//*[@*='']").each do |node|
-          node.attributes.each do |name, _|
+          node.attributes.each_key do |name|
             remove_if_empty node, name
           end
         end
