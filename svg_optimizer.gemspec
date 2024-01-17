@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary       = spec.description
   spec.homepage      = "https://github.com/fnando/svg_optimizer"
   spec.license       = "MIT"
-  spec.required_ruby_version = ">= 2.7"
+  spec.required_ruby_version = ">= 3.1"
   spec.metadata = {"rubygems_mfa_required" => "true"}
 
   spec.files         = Dir["LICENSE.md", "README.md", "lib/**/*"]
